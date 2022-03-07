@@ -8,26 +8,32 @@ class GroceryListItem extends React.Component {
     super(props);
 
     this.state = {
-      done: false
+      hover: false
     }
   }
 
-  onListItemClick() {
+  onHover() {
     this.setState({
-      done: !this.state.done
+      hover: true
     });
   };
+
+  onLeave() {
+    this.setState({
+      hover: false
+    });
+  }
 
   render() {
     var style = {
       'user-select': 'none',
       cursor: 'pointer',
       width: 'fit-content',
-      'font-weight': this.state.done ? 'bold' : 'normal'
+      'font-weight': this.state.hover ? 'bold' : 'normal'
     }
 
     return (
-      <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.item}</li>
+      <li style={style} onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onLeave.bind(this)} >{this.props.item}</li>
     );
   };
 }
@@ -43,4 +49,5 @@ var GroceryList = (props) => (
 );
 
 
-ReactDOM.render(<GroceryList items={['Milk', 'Cookies', 'Rice']} />, document.getElementById('app'));
+let groceries = ['Milk', 'Juice', 'Apples', 'Oranged', 'Cookies', 'Lettuce', 'Carrots', 'Salt', 'Flour', 'Sugar', 'Cheese', 'Eggs', 'Detergent'];
+ReactDOM.render(<GroceryList items={groceries} />, document.getElementById('app'));
